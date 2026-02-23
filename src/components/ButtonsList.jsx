@@ -1,43 +1,28 @@
+import Card from "./Card"
+import { languages } from "../assets/languages"
+import { useState } from "react"
+
 export default function ButtonsList() {
-    const listaBottoni = [
-        {
-            id: 1,
-            nome: "HTML"
-        },
-        {
-            id: 2,
-            nome: "CSS"
-        },
-        {
-            id: 3,
-            nome: "JavaScript"
-        },
-        {
-            id: 4,
-            nome: "Node.js"
-        },
-        {
-            id: 5,
-            nome: "Express"
-        },
-        {
-            id: 6,
-            nome: "ReactJS"
-        }
-    ]
+    const [linguaggio, setLinguaggio] = useState({languages})
+    const [attivo, setAttivo] = useState(false)
 
 
     return (
-        <div className="container my-5">
-            <div className="btn-group" role="group" aria-label="Basic example">
+        <>
+        <div className="container m-5">
+            <div className="btn-group" role="group" aria-label="Basic button group">
                 {
-                    listaBottoni.map((bottone) => (
-                        <button key={bottone.id} type="button" className="btn btn-primary mx-3">
-                            {bottone.nome}
+                    languages.map((curLang) => (<button onClick={() => {
+                        setLinguaggio(curLang)
+                        setAttivo(true)
+                        }} key={curLang.id} type="button" className="btn btn-primary mx-3">
+                            {curLang.title}
                         </button>)
                     )
                 }
             </div>
         </div>
+        <Card titolo={linguaggio.title} descrizione={linguaggio.description} attivazione={attivo}/>
+        </>
     )
 }
